@@ -1,5 +1,4 @@
-node {
-	def app
+pipeline {
 	stages{
 		stage ('Initialize Maven') {
 		    agent any
