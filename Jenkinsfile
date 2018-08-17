@@ -1,12 +1,12 @@
 node {
-    agent any
-    tools { 
-        maven 'Maven 3.3.9' 
-        jdk 'jdk8' 
-    }
 	def app
 	stages{
 		stage ('Initialize Maven') {
+		    agent any
+				tools { 
+					maven 'Maven 3.3.9' 
+					jdk 'jdk8' 
+					}
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
