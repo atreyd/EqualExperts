@@ -203,33 +203,30 @@
         </dependencies>
       </plugin>
         
-    <plugin>
-	<groupId>com.github.goldin</groupId>
-	<artifactId>copy-maven-plugin</artifactId>
-	<version>0.2.5</version>
-	<executions>
-		<execution>
-			<id>deploy-to-local-directory</id>
-			<phase>install</phase>
-			<goals>
-				<goal>copy</goal>
-			</goals>
-			<configuration>
-				<skipIdentical>false</skipIdentical>
-				<failIfNotFound>false</failIfNotFound>
-				<resources>
-					<resource>
-						<description>Copy artifact to another directory</description>
-						<targetPath>/mnt/artefact</targetPath>
-						<directory>${project.build.directory}</directory>
-						<includes>
-							<include>*.jar</include>
-						</includes>
-					</resource>
-				</resources>
-			</configuration>
-		</execution>
-	</executions>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>copy-installed</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>${project.artifactId}</artifactId>
+                  <version>${project.version}</version>
+                  <type>${project.packaging}</type>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>/mnt/artefact</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
 </plugin>
 </plugins>
 </build>
