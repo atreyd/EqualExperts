@@ -20,7 +20,7 @@ pipeline {
             stage ('Copy Artefacts') {
             steps {
                 echo 'This is the final stage to copy in /mnt/artefact.'
-                 sh 'cp /var/lib/jenkins/workspace/EqualExperts/target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.war /mnt/artefact/.'
+                 sh 'sudo cp /var/lib/jenkins/workspace/EqualExperts/target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.war /mnt/artefact/.'
             }
         }
         }
