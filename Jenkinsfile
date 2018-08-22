@@ -5,25 +5,22 @@ pipeline {
 			jdk 'JDK8'
 		}
 	stages{
-               stage ('Initialize Maven') {
+        stage('Clone repository') {
+                        /* Let's make sure we have the repository cloned to our workspace */
+           steps{
+                        checkout scm
+                }
+        }
+            stage ('Build WAR') {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
+                echo 'This is the stage to build war'
+                 sh 'mvn -B -DskipTests clean install'
             }
         }
-                stage('Clone repository') {
-                        /* Let's make sure we have the repository cloned to our workspace */
-						steps{
-                                checkout scm
-							}
-				}
-            stage ('Build JAR') {
+            stage ('Copy Artefacts') {
             steps {
-                echo 'This is a minimal pipeline.'
-                                sh 'mvn -B -DskipTests clean install'
-
+                echo 'This is the final stage to copy in /mnt/artefact.'
+                 sh 'cp /var/lib/jenkins/workspace/spring-petclinic-2.0.0.BUILD-SNAPSHOT /mnt/artefact/.'
             }
         }
         }
